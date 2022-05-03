@@ -1,0 +1,151 @@
+
+<div class="container-fluid ps-0">
+    <div class="row w-100 p-0">
+        <div class="col-2" id="side" style="height:91vh;">
+            <%- include('../side') %>
+        </div>
+        <div class="col-10">
+          <div class="btn-group float-end" role="group" aria-label="Basic example">
+            <a href="" class="btn btn-primary float-end mt-3"  data-bs-toggle="modal" data-bs-target="#exampleModal">Add Class Period</a>
+          </div>
+            
+            <h4 class="mt-3 border-start border-4 px-2"><%-class_data.class_name %> Subject and Periods </h4>
+
+            <table class="table mt-4">
+                <thead class="table-dark">
+                  <tr>
+                      <th>Period </th>
+                      <th>Subject</th>
+                      <th> Teacher Name</th>
+                      <th>Teacher Role</th>
+                      <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% class_data.subject_teacher.forEach(data => { %>
+                      <tr>
+                          <th><%- data.period_name %> Period </th>
+                           <td><%-data.subject_teacher_id.subject %></td>
+                           <td><%-data.subject_teacher_id.name %></td>
+                           <% if ((data.period_name) == 1 ){ %>
+                            <td>Class Teacher </td>
+                          <% } else { %>
+                            <td>Subject Teacher </td>
+                         <% } %>
+                           
+                           <td>
+                            <a href="/admin/delete-patient/ " class="btn btn-sm btn-primary"><i class="bi bi-pencil"></i></i></a>
+                            <a href="/admin/delete-patient/ " class="btn btn-sm btn-danger"><i class="bi bi-trash"></i></i></a>
+                          </td>
+                      </tr>
+                      <% }) %>
+                </tbody>
+              </table>
+        </div>
+    </div>
+  </div>
+
+
+<!-- Modal -->
+<div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="exampleModalLabel">Add Class Period</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <form action="/admin/insertSubjectPeriod" id="target" method="post">
+            <input type="hidden" name="class_name" id="class_name" value="<%-class_data.class_name %>">
+        <div class="mb-3 row">
+            <div class="col">
+                    <label for="education">Class Name</label>
+                    <select name="subject" id="subject"  class="form-select">
+                      <option selected  disabled> select subject </option>
+                      <option value="maths">Maths</option>
+                      <option value="science">Science</option>
+                      <option value="english">English</option>
+                      <option value="sst">SST</option>
+                      <option value="hindi">Hindi</option>
+                  </select>
+            </div>
+            <div class="col">
+              <label for="name">Subject Teacher Name</label>
+              <select name="subject_teacher" id="subject_teacher"  class="form-select">
+                <option selected disabled>select subject Teacher</option>
+              </select>
+              </div>
+        </div>
+    </div>
+    <div class="modal-footer">
+      <input type="submit" class="btn btn-primary w-100" value="Create">
+    </div>
+        </form>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
+
+<!-- /////////////////// -->
+
+<script>
+  
+  $(document).ready(function(){
+              $('#subject').change(function(){
+                
+                  let subject = this.value;
+                  console.log(subject);
+                  $.ajax({
+                    type: "post",
+                    url: "/admin/subject/name",
+                    data: { subject_name: subject },
+                    success: function(res) {
+                    res.forEach(data => {
+                      var teacher_id = data._id;
+                          var teacher_name = data.name;
+                          $('#subject_teacher').append(`<option value="${teacher_id}"> ${teacher_name}</option>`);
+                    });
+                    },
+                 });
+              });
+            });
+$(document).ready(function(){
+  $( "#target" ).submit(function( event ) {
+  event.preventDefault();
+  let class_name =$("#class_name").val();
+  let subject =$("#subject").val();
+  let subject_teacher = $("#subject_teacher").val();
+  // alert(`${teacher_id} this is class name ${class_name} ${subject}`);
+             $.ajax({
+                    type: "post",
+                    url: "/admin/insertSubjectPeriod",
+                    data: { class_name: class_name,subject:subject,subject_teacher:subject_teacher },
+                    success: function(res) {
+                      const Toast = Swal.mixin({
+                              toast: true,
+                              position: 'top-end',
+                              showConfirmButton: false,
+                              timer: 3000,
+                              timerProgressBar: true,
+                              didOpen: (toast) => {
+                                toast.addEventListener('mouseenter', Swal.stopTimer)
+                                toast.addEventListener('mouseleave', Swal.resumeTimer)
+                              }
+                            })
+
+                            Toast.fire({
+                              icon: res.status,
+                              title: res.msg
+                            })
+                            setTimeout(function() {
+                                location.reload();
+                            }, 3000);
+                    },
+            });
+});
+})
+
+      
+</script>

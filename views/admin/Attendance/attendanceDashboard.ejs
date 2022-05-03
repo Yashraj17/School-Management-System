@@ -1,0 +1,39 @@
+<div class="container-fluid ps-0">
+    <div class="row w-100 p-0">
+        <div class="col-2" id="side" style="height:91vh;">
+            <%- include('../side') %>
+        </div>
+
+        <div class="col-10">
+            <div class="row mt-4">
+                <% class_data.forEach(data => { %>
+                    <div class="col-3">
+                        <div class="card bg-dark text-white ">
+                            <div class="card-body ms-2 ">
+                                <a href="/admin/attendance/<%-data.class_name %>" class="stretched-link display-6 text-decoration-none text-white text-capitalize "><%-data.class_name %></a>
+                                <h5>Class Teacher <span>
+                                    <%-data.class_teacher %>
+                                </span> </h5>
+                                <h6>Total Students
+                                    <span id="count">
+                                        <%-data.no_of_student %>
+                                    </span> </h5>
+                                </h6>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+                    
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    $(document).ready(function () {
+        $('#count').counterUp({
+        delay: 10,
+        time: 1000
+    });
+    })
+    </script>

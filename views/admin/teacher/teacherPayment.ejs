@@ -1,0 +1,42 @@
+
+<div class="container-fluid ps-0">
+    <div class="row w-100 p-0">
+        <div class="col-2" id="side" style="height:91vh;">
+            <%- include('../side') %>
+        </div>
+        <div class="col-10">
+            <h4 class="mt-3 border-start border-4 px-2">Manage Payment </h4>
+            <table class="table mt-4">
+                <thead class="table-dark">
+                  <tr>
+                      <th>Name</th>
+                      <th>Contact</th>
+                      <th>Amount</th>
+                      <th>Month</th>
+                      <th>Month of Due</th>
+                      <th>status</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    <% data.forEach(data => { %>
+                        <tr>
+                            <td><%-data.teacher_id.name %></td>
+                            <td><%-data.teacher_id.contact %></td>
+                            <td><%-data.amount %></td>
+                            <td><%-data.month %></td>
+                            <td><%-data.date_of_payment %></td>
+                            <td>
+                                <% if(( data.payment_status ) == 0){ %>
+                                    <a href= "/admin/manage-teacher-payment/<%= data._id%>  " class="badge bg-danger text-decoration-none">Due</i></a>
+                                <%} else {%>
+                                    <a href= "" class="badge bg-success text-decoration-none badge-disabled">Paid</i></a>
+                               <% }  %>
+                              
+                            </td>
+                        </tr>
+                        <% }) %>
+                </tbody>
+              </table>
+        </div>
+    </div>
+  </div>

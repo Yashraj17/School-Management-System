@@ -1,0 +1,56 @@
+<div class="container-fluid ps-0">
+    <div class="row w-100 p-0">
+        <div class="col-2" id="side" style="height:91vh;">
+            <%- include('side') %>
+        </div>
+        <div class="col-10">
+            <div class="row mt-4">
+                <div class="col-3">
+                    <div class="card bg-warning text-white">
+                        <div class="card-body ms-2">
+                            <h1 class="display-7"></h1>
+                            <h5>Name <span>Yash Raj</span></h5>
+                            <h6>Payments</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card bg-danger text-white">
+                        <div class="card-body ms-2">
+                            <h1 class="display-7"></h1>
+                            <h5>Class Teacher Of</h5>
+                            <h6 class="count">56565</h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card bg-success text-white">
+                        <div class="card-body ms-2">
+                            <h1 class="display-7"></h1>
+                            <h5>Subject</h5>
+                            <h6 class="count">766567 </h6>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-3">
+                    <div class="card bg-primary text-white">
+                        <div class="card-body ms-2">
+                            <h1 class="display-7"></h1>
+                            <h5>Total Student </h5>
+                            <h6 class="count">766567 </h6>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+$(document).ready(function () {
+    $('.count').counterUp({
+    delay: 10,
+    time: 3000
+});
+})
+</script>

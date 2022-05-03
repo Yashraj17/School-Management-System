@@ -1,0 +1,75 @@
+
+<div class="container-fluid ps-0">
+    <div class="row w-100 p-0">
+        <div class="col-2" id="side" style="height:91vh;">
+            <%- include('side') %>
+        </div>
+        <div class="col-10">
+            <div class="container-fluid my-4">
+                <div class="row px-0">
+                <div class="card border-0 shadow-sm">
+                    <div class="card-header bg-transparent">
+                        <h5>Add student Details</h5>
+                    </div>
+                    <div class="card-body">
+                        <form action="/admin/approve-admission" method="post">
+                            <input type="hidden" name="std_id" value="<%-data._id %>" >
+                            <div class="row">
+                                <div class="mb-3 col-lg-6 ">
+                                    <label for="name">Student Name</label>
+                                    <input type="text" name="std_name" value="<%-data.name %>"  class="form-control rounded shadow-sm">
+                                </div>
+                                <div class="mb-3 col-lg-6 ">
+                                    <label for="name">Roll No / RF No</label>
+                                    <input type="number" name="rollno" value="" id="name" class="form-control rounded shadow-sm">
+                                </div>
+                            </div>
+
+                            <div class="row">
+                                <div class="mb-3 col-lg-4">
+                                    <label for="education">Admission For Class </label>
+                                    <select name="class_name"  class="form-select">
+                                        <option value="<%-data.class_name %>"  ><%-data.class_name %></option>
+                                        <option value="class 1">class 1</option>
+                                        <option value="class 2">class 2</option>
+                                        <option value="class 3">class 3</option>
+                                        <option value="class 4">class 4</option>
+                                        <option value="class 5">class 5</option>
+                                        <option value="class 6">class 6</option>
+                                        <option value="class 7">class 7</option>
+                                        <option value="class 8">class 8</option>
+                                        <option value="class 9">class 9</option>
+                                    </select>
+                                </div>
+                                <div class="mb-3 col-lg-4 ">
+                                    <label for="mother_name" class="ms-5">Book and Accessories</label>
+                                    <br>
+                                    <div class="form-check form-check-inline ms-5">
+                                        <input class="form-check-input" type="radio" name="book_and_accessories" id="inlineRadio1" value="yes">
+                                        <label class="form-check-label" for="inlineRadio1">Yes</label>
+                                      </div>
+                                      <div class="form-check form-check-inline ms-5">
+                                        <input class="form-check-input" type="radio" name="book_and_accessories" id="inlineRadio2" value="no">
+                                        <label class="form-check-label" for="inlineRadio2">No</label>
+                                      </div>
+                                     
+                                </div>
+                                <div class="mb-3 col-lg-4">
+                                    <label for="education">Admission Type</label>
+                                        <select name="admission_type" id="" class="form-select rounded shadow-sm">
+                                            <option selected  value="newAdmission" >New Admission</option>
+                                            <option  value="reAdmission" >Re-Admission</option>
+                                        </select>
+                                </div>
+                            </div>
+                           <div class="mb-3">
+                               <button class="btn btn-dark w-100">submit</button>
+                           </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+            </div>
+        </div>
+    </div>
+</div>

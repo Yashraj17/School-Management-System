@@ -1,0 +1,30 @@
+<div class="container-fluid ps-0">
+    <div class="row w-100 p-0">
+        <div class="col-2" id="side" style="height:91vh;">
+            <%- include('../side') %>
+        </div>
+        <div class="col-10">
+            <div class="row mt-4">
+                <h3 class=" border-start border-4 px-2 ms-2"> Classes Fee Details </h3>
+                <% fee.forEach(data => { %>
+                    <div class="col-3">
+                        <div class="card bg-dark text-white ">
+                            <div class="card-body ms-2 ">
+                                <a href="/admin/studentPayment/<%-data.class_name %>" class="stretched-link display-6 text-decoration-none text-white text-capitalize "><%-data.class_name %></a>
+                                <h5>Total Due  <span>
+                                    <%- data.due %>
+                                </span> </h5>
+                                <h6>Total Payment Receive <span>
+                                    <%-data.paid %>
+                                </span></h6>
+                                <h6>Total student <span>
+                                    <%-data.no_of_student %>
+                                </span></h6>
+                            </div>
+                        </div>
+                    </div>
+                    <% }) %>
+            </div>
+        </div>
+    </div>
+</div>
